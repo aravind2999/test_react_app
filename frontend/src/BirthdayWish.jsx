@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import "./BirthdayWish.css";
 
 // Edit these two lines to personalize the page.
-const HER_NAME = "Doctor Dearest";
-const YOUR_NAME = "Yours, Always";
+const HER_NAME = "Akshi";
+const YOUR_NAME = "Aravind";
 
 const CONFETTI_COLORS = ["#14b8a6", "#0f766e", "#d4af37", "#f5d78e", "#fdfcf7"];
 const PARTICLES = [
