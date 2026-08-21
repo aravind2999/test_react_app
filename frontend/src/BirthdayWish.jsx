@@ -16,13 +16,22 @@ const PARTICLES = [
   { symbol: "♥", left: "92%", size: "1rem", duration: "14s", delay: "2.5s" },
 ];
 
+const SPARKLES = Array.from({ length: 10 }, (_, i) => {
+  const angle = (i / 10) * Math.PI * 2;
+  return {
+    id: i,
+    tx: `${Math.cos(angle) * (40 + (i % 3) * 10)}px`,
+    ty: `${Math.sin(angle) * (40 + (i % 3) * 10)}px`,
+    delay: `${(i % 5) * 0.05}s`,
+  };
+});
+
 function BirthdayWish() {
-  const [revealed, setRevealed] = useState(false);
+  // stage progresses idle -> kneel -> open -> revealed
+  const [stage, setStage] = useState("idle");
   const [confetti, setConfetti] = useState([]);
 
-  function openSurprise() {
-    setRevealed(true);
-
+  function launchConfetti() {
     const pieces = Array.from({ length: 60 }, (_, i) => ({
       id: `${Date.now()}-${i}`,
       left: `${Math.random() * 100}%`,
@@ -34,6 +43,16 @@ function BirthdayWish() {
     }));
     setConfetti(pieces);
     setTimeout(() => setConfetti([]), 4800);
+  }
+
+  function presentSurprise() {
+    if (stage !== "idle") return;
+    setStage("kneel");
+    setTimeout(() => setStage("open"), 1200);
+    setTimeout(() => {
+      setStage("revealed");
+      launchConfetti();
+    }, 1200 + 900);
   }
 
   return (
@@ -107,10 +126,71 @@ function BirthdayWish() {
       </div>
 
       <div className="bw-surprise-wrap">
-        <button className="bw-surprise-btn" onClick={openSurprise} disabled={revealed}>
-          {revealed ? "Surprise Opened" : "Open Your Surprise"}
-        </button>
-        {revealed && (
+        {stage === "idle" && (
+          <button className="bw-surprise-btn" onClick={presentSurprise}>
+            Present Your Surprise
+          </button>
+        )}
+
+        {stage !== "idle" && (
+          <div className={`bw-kneel-scene bw-stage-${stage}`}>
+            <svg className="bw-kneel-figure" viewBox="0 0 160 140" aria-hidden="true">
+              <g
+                fill="none"
+                stroke="var(--teal-deep)"
+                strokeWidth="4"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <circle cx="58" cy="24" r="11" />
+                <path d="M58 35 C57 50 55 65 52 79" />
+                <path d="M52 79 L46 118 L30 108" />
+                <path d="M52 79 L78 90 L98 119" />
+                <path d="M55 42 L86 60" />
+              </g>
+              <g transform="translate(84,54)">
+                <rect
+                  className="bw-box-base"
+                  x="0"
+                  y="10"
+                  width="26"
+                  height="18"
+                  rx="2"
+                  fill="var(--gold)"
+                  stroke="var(--teal-deep)"
+                  strokeWidth="2"
+                />
+                <rect
+                  className="bw-box-lid"
+                  x="-2"
+                  y="4"
+                  width="30"
+                  height="10"
+                  rx="2"
+                  fill="var(--gold-soft)"
+                  stroke="var(--teal-deep)"
+                  strokeWidth="2"
+                />
+              </g>
+            </svg>
+
+            {stage === "open" && (
+              <div className="bw-sparkle-burst" aria-hidden="true">
+                {SPARKLES.map((s) => (
+                  <span
+                    key={s.id}
+                    className="bw-sparkle"
+                    style={{ "--tx": s.tx, "--ty": s.ty, animationDelay: s.delay }}
+                  >
+                    ✦
+                  </span>
+                ))}
+              </div>
+            )}
+          </div>
+        )}
+
+        {stage === "revealed" && (
           <p className="bw-surprise-note">
             &ldquo;Happy Birthday to the person who makes everyone else&apos;s life better for a living
             &mdash; and mine best of all. I love you.&rdquo;
