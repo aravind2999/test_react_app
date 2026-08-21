@@ -2,8 +2,8 @@ import React, { useState } from "react";
 import "./BirthdayWish.css";
 
 // Edit these two lines to personalize the page.
-const HER_NAME = "Doctor Dearest";
-const YOUR_NAME = "Yours, Always";
+const HER_NAME = "Akshi";
+const YOUR_NAME = "Aravind";
 
 const CONFETTI_COLORS = ["#14b8a6", "#0f766e", "#d4af37", "#f5d78e", "#fdfcf7"];
 const PARTICLES = [
@@ -100,8 +100,8 @@ function BirthdayWish() {
           you still find the heart to be endlessly kind, endlessly brilliant, and endlessly you.
         </p>
         <p>
-          Today isn&apos;t about anyone you&apos;ve cared for &mdash; it&apos;s about you. So here&apos;s to
-          the doctor who heals the world, and the woman who has completely stolen my heart.
+          Today isn&apos;t about anyone you&apos;ve cared for &mdash; it&apos;s about you. So here&apos;s to my
+          dearest, the woman who has completely stolen my heart.
         </p>
         <p>Happy Birthday. I hope this year brings you as much joy as you bring everyone around you.</p>
       </div>
