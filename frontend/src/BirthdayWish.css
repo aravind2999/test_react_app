@@ -319,80 +319,6 @@
   transform: none;
 }
 
-.bw-kneel-scene {
-  position: relative;
-  width: 160px;
-  height: 140px;
-}
-
-.bw-kneel-figure {
-  width: 100%;
-  height: 100%;
-  opacity: 0;
-}
-
-.bw-stage-kneel .bw-kneel-figure,
-.bw-stage-open .bw-kneel-figure,
-.bw-stage-revealed .bw-kneel-figure {
-  animation: kneel-in 0.9s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-}
-
-@keyframes kneel-in {
-  0% {
-    opacity: 0;
-    transform: translateY(22px) scale(0.75);
-  }
-  60% {
-    opacity: 1;
-    transform: translateY(-4px) scale(1.03);
-  }
-  100% {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-.bw-box-lid {
-  transform-box: fill-box;
-  transform-origin: 0% 100%;
-  transition: transform 0.7s ease;
-}
-
-.bw-stage-open .bw-box-lid,
-.bw-stage-revealed .bw-box-lid {
-  transform: rotate(-115deg);
-}
-
-.bw-sparkle-burst {
-  position: absolute;
-  left: 62%;
-  top: 42%;
-  pointer-events: none;
-}
-
-.bw-sparkle {
-  position: absolute;
-  color: var(--gold);
-  font-size: 1rem;
-  transform: translate(0, 0) scale(0);
-  opacity: 0;
-  animation: sparkle-pop 0.9s ease-out forwards;
-}
-
-@keyframes sparkle-pop {
-  0% {
-    transform: translate(0, 0) scale(0);
-    opacity: 0;
-  }
-  40% {
-    opacity: 1;
-  }
-  100% {
-    transform: translate(var(--tx), var(--ty)) scale(1);
-    opacity: 0;
-  }
-}
-
 .bw-surprise-note {
   max-width: 480px;
   text-align: center;
@@ -458,14 +384,8 @@
   .bw-heartbeat path,
   .bw-title .bw-name,
   .bw-photo-ring,
-  .bw-confetti-piece,
-  .bw-kneel-figure,
-  .bw-sparkle {
+  .bw-confetti-piece {
     animation: none !important;
-  }
-
-  .bw-box-lid {
-    transition: none;
   }
 
   .bw-eyebrow,
@@ -474,8 +394,7 @@
   .bw-photo-wrap,
   .bw-card,
   .bw-surprise-wrap,
-  .bw-footer,
-  .bw-kneel-figure {
+  .bw-footer {
     animation: fadeInUp 0.01s ease forwards;
     opacity: 1;
   }
